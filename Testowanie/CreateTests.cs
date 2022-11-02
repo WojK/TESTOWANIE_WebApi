@@ -159,7 +159,7 @@ namespace Testowanie
                 Gender = "Male"
             };
 
-            clientsContextMock.Setup(x => x.Find(It.IsAny<int>())).Returns(null);
+            clientsContextMock.Setup(x => x.Find(It.IsAny<int>())).Returns((Client)null);
             IClientService clientService = new ClientService(clientsContextMock.Object);
 
 
