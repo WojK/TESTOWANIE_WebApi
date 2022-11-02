@@ -150,15 +150,6 @@ namespace Testowanie
             // arrange
             var clientsContextMock = new Mock<IClientContext>();
 
-            Client client = new Client
-            {
-                Name = "Janek",
-                Surname = "Kowal",
-                Country = "England",
-                Age = 12,
-                Gender = "Male"
-            };
-
             clientsContextMock.Setup(x => x.Find(It.IsAny<int>())).Returns((Client)null);
             IClientService clientService = new ClientService(clientsContextMock.Object);
 
@@ -199,10 +190,62 @@ namespace Testowanie
 
             int Id = 1;
 
-            // act and assert
-            //Assert.Throws<ArgumentException>(
-            //    () => { Client client = clientService.EditClient(Id, editedClient); });
+            // act
+
+            Client result = clientService.DeleteClient(Id);
+
+            // assert
+
+            Assert.NotNull(result);
         }
+
+        [Fact]
+        public void When_DeleteClient_WithIncorrectID_RaisesException()
+        {
+            // arrange
+            var clientsContextMock = new Mock<IClientContext>();
+
+            clientsContextMock.Setup(x => x.Find(It.IsAny<int>())).Returns((Client)null);
+            IClientService clientService = new ClientService(clientsContextMock.Object);
+
+
+            int Id = 123;
+
+            // act and assert
+            Assert.Throws<Exception>(
+                () => { Client client = clientService.DeleteClient(Id); });
+        }
+
+        [Fact]
+        public void When_GetClient_ReturnsClientWithProperProperties()
+        {
+            // arrange
+            ClientDTO newClient = new ClientDTO
+            {
+                Name = "Jan",
+                Surname = "Kowalski",
+                Country = "Poland",
+                Age = 10,
+                Gender = "Male"
+            };
+
+            IClientContext clientContext = new ClientContext();
+            IClientService clientService = new ClientService(clientContext);
+            Client client = clientService.AddClient(newClient);
+
+
+            // act
+            Client result = clientService.GetClient(client.Id);
+
+            // assert
+            Assert.Equal(result.Name, newClient.Name);
+            Assert.Equal(result.Surname, newClient.Surname);
+            Assert.Equal(result.Country, newClient.Country);
+            Assert.Equal(result.Gender, newClient.Gender);
+            Assert.Equal(result.Age, newClient.Age);
+
+        }
+
 
 
     }
