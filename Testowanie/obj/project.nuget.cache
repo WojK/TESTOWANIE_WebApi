@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Y+lXN+cmhvvrWIWhxF/XOK3e7pjrkt+Z8gKug4Bnnb5V2EcWnc5ebXtoGASAzvNBGDz6b2Zf+N2ZteFpQ7Wvpw==",
+  "dgSpecHash": "EmjEbrCbkluEe7lck9gJ4ZkOJhBgxGSxgdCgFAixrRk2TgbXNVWTcjC42VX5TsgdlK4yaNOhomRkmGvKzvCzOQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wojte\\source\\repos\\WojK\\Testowanie\\Testowanie.csproj",
+  "projectFilePath": "C:\\Users\\wojte\\source\\repos\\WojK\\TESTOWANIE.22.11.02\\Testowanie\\Testowanie.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wojte\\.nuget\\packages\\autofixture\\4.17.0\\autofixture.4.17.0.nupkg.sha512",
     "C:\\Users\\wojte\\.nuget\\packages\\autofixture.xunit2\\4.17.0\\autofixture.xunit2.4.17.0.nupkg.sha512",
@@ -133,30 +133,9 @@
     "C:\\Users\\wojte\\.nuget\\packages\\xunit.analyzers\\0.10.0\\xunit.analyzers.0.10.0.nupkg.sha512",
     "C:\\Users\\wojte\\.nuget\\packages\\xunit.assert\\2.4.1\\xunit.assert.2.4.1.nupkg.sha512",
     "C:\\Users\\wojte\\.nuget\\packages\\xunit.core\\2.4.1\\xunit.core.2.4.1.nupkg.sha512",
-    "C:\\Users\\wojte\\.nuget\\packages\\xunit.extensibility.core\\2.4.2\\xunit.extensibility.core.2.4.2.nupkg.sha512",
+    "C:\\Users\\wojte\\.nuget\\packages\\xunit.extensibility.core\\2.4.1\\xunit.extensibility.core.2.4.1.nupkg.sha512",
     "C:\\Users\\wojte\\.nuget\\packages\\xunit.extensibility.execution\\2.4.1\\xunit.extensibility.execution.2.4.1.nupkg.sha512",
     "C:\\Users\\wojte\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.3\\xunit.runner.visualstudio.2.4.3.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1608",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: xunit.core 2.4.1 requires xunit.extensibility.core (= 2.4.1) but version xunit.extensibility.core 2.4.2 was resolved.",
-      "libraryId": "xunit.extensibility.core",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1608",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: xunit.extensibility.execution 2.4.1 requires xunit.extensibility.core (= 2.4.1) but version xunit.extensibility.core 2.4.2 was resolved.",
-      "libraryId": "xunit.extensibility.core",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  "logs": []
 }
