@@ -277,5 +277,33 @@ namespace Testowanie {
             Assert.Throws<Exception>(
                 () => { Client client = clientService.EditClient(Id, editedClient); });
         }
+
+        [Fact]
+        public void When_EditClient_WithNullClientButCorrectID_RaisesException()
+        {
+            // arrange
+            var clientsContextMock = new Mock<IClientContext>();
+
+            clientsContextMock.Setup(x => x.Find(It.IsAny<int>())).Returns((Client)null);
+            IClientService clientService = new ClientService(clientsContextMock.Object);
+
+
+            int Id = 10;
+            ClientDTO editedClient = new ClientDTO
+            {
+                Name = "Jan",
+                Surname = "Kowalski",
+                Country = "Poland",
+                Age = 10,
+                Gender = "Male",
+                Email = "string@gmail.com"
+            };
+
+            // act and assert
+            Assert.Throws<Exception>(
+                () => { Client client = clientService.EditClient(Id, (ClientDTO)null); });
+        }
+
+
     }
 }

@@ -149,6 +149,57 @@ namespace Testowanie {
             Assert.Equal(result, (IEnumerable<Client>)null);
 
         }
+
+        [Fact]
+        public void When_GetClients_ReturnsNotEmptyList()
+        {
+            //arrange
+            var clientsContextMock = new Mock<IClientContext>();
+            IClientService clientService = new ClientService(clientsContextMock.Object);
+
+            Client FirstClinet = new Client
+            {
+                Id = 1,
+                Name = "Jan",
+                Surname = "Kowalski",
+                Country = "Poland",
+                Age = 10,
+                Gender = "Male"
+            };
+
+            Client SecondClinet = new Client
+            {
+                Id = 2,
+                Name = "Jan",
+                Surname = "Kowalski",
+                Country = "Poland",
+                Age = 10,
+                Gender = "Male"
+            };
+
+            Client ThirdClinet = new Client
+            {
+                Id = 3,
+                Name = "Jan",
+                Surname = "Kowalski",
+                Country = "Poland",
+                Age = 10,
+                Gender = "Male"
+            };
+
+            IEnumerable<Client> set = new HashSet<Client>();
+            set.Append<Client>(FirstClinet);
+            set.Append<Client>(SecondClinet);
+            set.Append<Client>(ThirdClinet);
+            clientsContextMock.Setup(x => x.Set<Client>()).Returns(set);
+
+            //act
+            var result = clientService.GetClients();
+
+            //assert
+            Assert.Equal(set, result);
+
+        }
     }
 }
 
