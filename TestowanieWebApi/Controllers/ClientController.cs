@@ -21,12 +21,6 @@ namespace TestowanieWebApi.Controllers
             this.clientService = new ClientService(new ClientContext());
         }
 
-        // poniższy konstruktor może okazać się przydatny podczas testowania,aby w to miejsce podstawić mok bazy danych
-        public ClientController(ClientContext clientContext)
-        {
-            this.clientService = new ClientService(clientContext);
-        }
-
 
         [HttpPost("/AddClient")]
         public ActionResult<Client> AddClient([FromBody] ClientDTO clientDTO)

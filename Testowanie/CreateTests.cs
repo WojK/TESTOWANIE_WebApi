@@ -229,8 +229,7 @@ namespace Testowanie
                 Gender = "Male"
             };
 
-            IClientContext clientContext = new ClientContext();
-            IClientService clientService = new ClientService(clientContext);
+            IClientService clientService = new ClientService();
             Client client = clientService.AddClient(newClient);
 
 

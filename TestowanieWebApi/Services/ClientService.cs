@@ -14,6 +14,11 @@ namespace TestowanieWebApi.Services
             _context = context;
         }
 
+        public ClientService()
+        {
+            _context = new ClientContext();
+        }
+
 
         public Client AddClient(ClientDTO clientDTO)
         {
@@ -31,7 +36,6 @@ namespace TestowanieWebApi.Services
                 Country = clientDTO.Country
             };
 
-            // _context.Add<Client>(newClient);
             _context.Add(newClient);
             _context.SaveChanges();
 
@@ -45,7 +49,6 @@ namespace TestowanieWebApi.Services
             {
                 throw new Exception("Not found client with id -> " + Id);
             }
-            //_context.Clients.Remove(client);
             _context.Remove(client);
             _context.SaveChanges();
                 return client;
