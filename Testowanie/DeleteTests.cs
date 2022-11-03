@@ -21,7 +21,8 @@ namespace Testowanie {
                 Surname = "Kowal",
                 Country = "England",
                 Age = 12,
-                Gender = "Male"
+                Gender = "Male",
+                Email = "string@gmail.com"
             };
 
             clientsContextMock.Setup(x => x.Find(It.IsAny<int>())).Returns(client);

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TestowanieWebApi.Database;
 using TestowanieWebApi.Models;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace TestowanieWebApi.Services
 {
@@ -27,13 +29,29 @@ namespace TestowanieWebApi.Services
                 throw new ArgumentException();
             }
 
+            if(clientDTO.Name == null || clientDTO.Surname == null ||
+                clientDTO.Gender == null || clientDTO.Country == null || clientDTO.Email == null)
+            {
+                throw new ArgumentException();
+            }
+
+            if (clientDTO.Gender != "Female" && clientDTO.Gender != "Male") {
+                throw new ArgumentException();
+            }
+
+            if (!(new EmailAddressAttribute().IsValid(clientDTO.Email)))
+            {
+                throw new ArgumentException();
+            }
+
             Client newClient = new Client()
             {
                 Name = clientDTO.Name,
                 Surname = clientDTO.Surname,
                 Age = clientDTO.Age,
                 Gender = clientDTO.Gender,
-                Country = clientDTO.Country
+                Country = clientDTO.Country,
+                Email = clientDTO.Email
             };
 
             _context.Add(newClient);
@@ -64,6 +82,14 @@ namespace TestowanieWebApi.Services
             if (clientDTO.Age <= 0)
             {
                 throw new ArgumentException("Client's age must be greater than 0");
+            }
+            if (clientDTO.Gender != "Female" && clientDTO.Gender != "Male")
+            {
+                throw new ArgumentException();
+            }
+            if (clientDTO.Name == null || clientDTO.Surname == null ||
+                clientDTO.Gender == null || clientDTO.Country == null) {
+                throw new ArgumentException();
             }
 
             client.Name = clientDTO.Name;

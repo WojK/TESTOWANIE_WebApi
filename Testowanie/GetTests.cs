@@ -21,7 +21,8 @@ namespace Testowanie {
                 Surname = "Kowalski",
                 Country = "Poland",
                 Age = 10,
-                Gender = "Male"
+                Gender = "Male",
+                Email = "email@gmail.com"
             };
             Client newClient = new Client {
                 Id = 1,
@@ -29,7 +30,8 @@ namespace Testowanie {
                 Surname = newClientDTO.Surname,
                 Country = newClientDTO.Country,
                 Age = newClientDTO.Age,
-                Gender = newClientDTO.Gender
+                Gender = newClientDTO.Gender,
+                Email = newClientDTO.Email
             };
 
             IClientService clientService = new ClientService(clientsContextMock.Object);
@@ -58,11 +60,15 @@ namespace Testowanie {
         }
 
         [Theory, AutoData]
-        public void When_GetCleints_ReturnsProperClients(ClientDTO client1, ClientDTO client2) {
+        public void When_GetClients_ReturnsProperClients(ClientDTO client1, ClientDTO client2) {
             // arrange
             var clientsContextMock = new Mock<IClientContext>();
             client1.Age = 10;
             client2.Age = 20;
+            client1.Gender = "Male";
+            client2.Gender = "Male";
+            client1.Email = "string@gmail.com";
+            client2.Email = "string@gmail.com";
             Client c1 = new Client {
                 Id = 1,
                 Name = client1.Name,
@@ -70,6 +76,7 @@ namespace Testowanie {
                 Country = client1.Country,
                 Age = client1.Age,
                 Gender = client1.Gender,
+                Email = client1.Email
             };
             Client c2 = new Client {
                 Id = 2,
@@ -78,6 +85,7 @@ namespace Testowanie {
                 Country = client2.Country,
                 Age = client2.Age,
                 Gender = client2.Gender,
+                Email = client2.Email
             };
             var addedClients = new[] { c1, c2 };
 
@@ -93,6 +101,38 @@ namespace Testowanie {
 
             // assert
             Assert.Equal(result, addedClients);
+        }
+
+        [Theory, AutoData]
+        public void When_GetManyClients_ReturnsProperClients(ClientDTO client1)
+        {
+            // arrange
+            var clientsContextMock = new Mock<IClientContext>();
+            List<Client> addedClients = new List<Client>();
+            for (int i = 0; i < 100; i++)
+            {
+                Client c = new Client
+                {
+                    Id = i,
+                    Name = client1.Name,
+                    Surname = client1.Surname,
+                    Country = client1.Country,
+                    Age = i,
+                    Gender = client1.Gender,
+                    Email = client1.Email
+
+                };
+                addedClients.Add(c);
+            }
+
+            IClientService clientService = new ClientService(clientsContextMock.Object);
+            clientsContextMock.Setup(x => x.Set<Client>()).Returns(addedClients);
+
+            // act
+            IEnumerable<Client> result = clientService.GetClients();
+
+            // assert
+            Assert.Equal(result.Count(), addedClients.Count());
         }
 
         [Fact]
