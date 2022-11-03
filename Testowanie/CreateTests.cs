@@ -220,7 +220,19 @@ namespace Testowanie {
                 () => { Client client = clientService.AddClient(newClient); });
         }
 
+        [Fact]
+        public void When_AddNullValue_RaisesException()
+        {
+            // arrange
+            var clientsContextMock = new Mock<IClientContext>();
+            ClientDTO? newClientNull = null;
 
+            IClientService clientService = new ClientService(clientsContextMock.Object);
+
+            // act and assert
+            Assert.Throws<ArgumentException>(
+                () => { Client client = clientService.AddClient(newClientNull); });
+        }
 
 
     }
